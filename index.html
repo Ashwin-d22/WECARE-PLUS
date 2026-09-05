@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="WECARE PLUS - Hospital and Healthcare Service Finder">
+<title>WECARE PLUS — Hospital & Healthcare Service Finder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3hJfR0LwM3z9J7yM5w8g6G5z6d3p8=" crossorigin="">
+
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+<div class="bg-shapes">
+  <div class="blob one"></div><div class="blob two"></div><div class="blob three"></div>
+  <div class="cross">✚</div><div class="cross">✚</div><div class="cross">✚</div>
+</div>
+
+<header class="navbar">
+  <div class="container nav-inner">
+    <a href="#home" data-page="home" class="logo"><span class="logo-mark"><i class="fa-solid fa-heart-pulse"></i></span><span>WECARE PLUS</span></a>
+    <nav class="nav-links" id="navLinks">
+<a href="#home" data-page="home">Home</a>
+<a href="#services" data-page="services">Services</a>
+<a href="#hospitals" data-page="hospitals">Hospitals & Map</a>
+<a href="#doctors" data-page="doctors">Doctors</a>
+<a href="#booking" data-page="booking">Book Appointment</a>
+<a href="#blood" data-page="blood">Emergency</a>
+<a href="#faq" data-page="faq">FAQ</a>
+</nav>
+
+    <div class="language-switcher"><i class="fa-solid fa-language"></i><select id="languageSelect">
+<option value="en">English</option><option value="hi">हिन्दी</option><option value="te">తెలుగు</option><option value="ta">தமிழ்</option>
+<option value="kn">ಕನ್ನಡ</option><option value="ml">മലയാളം</option><option value="mr">मराठी</option><option value="bn">বাংলা</option>
+<option value="gu">ગુજરાતી</option><option value="pa">ਪੰਜਾਬੀ</option><option value="or">ଓଡ଼ିଆ</option><option value="ur">اردو</option>
+</select></div><form class="header-search" id="headerSearch">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input id="headerQuery" type="search" placeholder="Search doctors, hospitals..." aria-label="Search healthcare">
+    </form><div class="mobile-page-menu"><select id="mobilePageSelect" aria-label="Choose page">
+<option value="home">Home</option><option value="services">Services</option><option value="hospitals">Hospitals & Map</option>
+<option value="doctors">Doctors</option><option value="booking">Book Appointment</option><option value="beds">Hospital Beds</option>
+<option value="labs">Lab Reports</option><option value="blood">Blood & Emergency</option><option value="faq">FAQ</option>
+</select></div>
+    <a href="#doctors" data-page="doctors" class="header-link"><i class="fa-solid fa-user-doctor"></i><span>Doctors</span></a>
+    <a href="#booking" data-page="booking" class="header-link"><i class="fa-solid fa-calendar-check"></i><span>Book</span></a>
+    <a href="#services" data-page="services" class="btn btn-primary desktop-nearby"><i class="fa-solid fa-location-crosshairs"></i> Find Nearby</a>
+    <button class="menu" id="menuBtn" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+  </div>
+</header>
+
+
+<div class="emergency-bar">
+  <div><i class="fa-solid fa-triangle-exclamation"></i><strong>Emergency?</strong> Call your local emergency service immediately.</div>
+  <a href="tel:112"><i class="fa-solid fa-phone"></i> Emergency: 112</a>
+</div>
+
+<main>
+<section data-page-view="home" class="hero" id="home">
+  <div class="container hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow"><i class="fa-solid fa-heart-pulse"></i> Healthcare made simple</span>
+      <h1>Find the right <span>care,</span> closer to you.</h1>
+      <p>Quickly discover hospitals, clinics, diagnostic centers, blood banks, pharmacies and emergency services in your area.</p>
+
+      <form class="search-panel" id="heroSearch">
+        <label class="search-field"><i class="fa-solid fa-magnifying-glass"></i><input id="heroQuery" type="search" placeholder="Search hospitals, clinics, doctors..." aria-label="Search healthcare"></label>
+        <label class="search-field"><i class="fa-solid fa-location-dot"></i><input id="heroLocation" type="text" placeholder="City or area" aria-label="Location"></label>
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+      <div class="hero-actions">
+        <button class="btn btn-light" id="locationBtn"><i class="fa-solid fa-location-crosshairs"></i> Use My Location</button>
+        <a href="#emergency" class="btn btn-danger"><i class="fa-solid fa-truck-medical"></i> Emergency Help</a>
+      </div>
+
+      <div class="stat-row">
+        <div class="stat"><strong>500+</strong><span>Healthcare Centers</span></div>
+        <div class="stat"><strong>120+</strong><span>Doctors</span></div>
+        <div class="stat"><strong>50+</strong><span>Diagnostic Centers</span></div>
+        <div class="stat"><strong>24/7</strong><span>Emergency Support</span></div>
+      </div>
+    </div>
+
+    <div class="hero-art reveal">
+      <div class="float-badge badge-a"><i class="fa-solid fa-shield-heart"></i> Verified Services</div>
+      <div class="float-badge badge-c"><i class="fa-solid fa-circle-check"></i> Open Now</div>
+      <div class="doctor-card">
+        <div class="avatar"><i class="fa-solid fa-user-doctor"></i></div>
+        <div class="type">Featured Specialist</div>
+        <div class="doc-title">Dr. Priya Sharma</div>
+        <div class="stars">★★★★★ <span class="small">4.9 (128 reviews)</span></div>
+        <div class="small"><i class="fa-solid fa-stethoscope"></i> Cardiology • 1.4 km away</div>
+        <div style="margin-top:18px"><button class="btn btn-primary" style="width:100%" onclick="showToast('Doctor profile selected')">View Profile</button></div>
+      </div>
+      <div class="float-badge badge-b"><i class="fa-solid fa-clock"></i> Fast & Easy Search</div>
+    </div>
+  </div>
+</section>
+
+<section data-page-view="services" class="section" id="services">
+<div class="container">
+  <div class="section-head reveal"><span class="eyebrow">Explore</span><h2>Find Healthcare Services</h2><p>Choose the service you need and discover relevant facilities around you.</p></div>
+  <div class="services-grid">
+    <div class="service-card reveal" data-filter="Hospital"><div class="icon"><i class="fa-solid fa-hospital"></i></div><h3>Hospitals</h3><p>Find multispeciality and general hospitals with emergency care.</p><button class="text-btn explore">Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="service-card reveal" data-filter="Clinic"><div class="icon"><i class="fa-solid fa-stethoscope"></i></div><h3>Clinics</h3><p>Discover general and specialist clinics near your location.</p><button class="text-btn explore">Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="service-card reveal" data-filter="Diagnostic Center"><div class="icon"><i class="fa-solid fa-vial"></i></div><h3>Diagnostic Centers</h3><p>Find pathology, imaging and diagnostic testing centers.</p><button class="text-btn explore">Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="service-card reveal" data-filter="Blood Bank"><div class="icon"><i class="fa-solid fa-droplet"></i></div><h3>Blood Banks</h3><p>Locate blood banks and nearby blood donation services.</p><button class="text-btn explore">Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="service-card reveal" data-filter="Pharmacy"><div class="icon"><i class="fa-solid fa-pills"></i></div><h3>Pharmacies</h3><p>Locate nearby pharmacies and medicine stores.</p><button class="text-btn explore">Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="service-card reveal" data-filter="Emergency"><div class="icon"><i class="fa-solid fa-truck-medical"></i></div><h3>Emergency Services</h3><p>Quick access to emergency healthcare facilities.</p><button class="text-btn explore">Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="service-card reveal" data-filter="Doctor"><div class="icon"><i class="fa-solid fa-user-doctor"></i></div><h3>Doctors</h3><p>Find medical professionals and healthcare specialists.</p><button class="text-btn explore">Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+    <div class="service-card reveal" data-filter="Ambulance"><div class="icon"><i class="fa-solid fa-ambulance"></i></div><h3>Ambulance</h3><p>Find emergency ambulance services when you need them.</p><button class="text-btn explore">Explore <i class="fa-solid fa-arrow-right"></i></button></div>
+  </div>
+</div>
+</section>
+
+
+<section data-page-view="services" class="section quick-section" id="quick-links">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">Quick Links</span><h2>Everything You Need, In One Place</h2><p>Fast access to appointments, beds, lab reports, consultations and healthcare support.</p></div>
+ <div class="quick-grid">
+   <button class="quick-card reveal" onclick="document.getElementById('appointment').scrollIntoView({behavior:'smooth'})"><span><i class="fa-solid fa-calendar-check"></i></span><strong>Book Appointment</strong><small>Choose a specialist & time</small></button>
+   <button class="quick-card reveal" onclick="document.getElementById('beds').scrollIntoView({behavior:'smooth'})"><span><i class="fa-solid fa-bed"></i></span><strong>Available Beds</strong><small>Check hospital bed status</small></button>
+   <button class="quick-card reveal" onclick="document.getElementById('labs').scrollIntoView({behavior:'smooth'})"><span><i class="fa-solid fa-file-waveform"></i></span><strong>Lab Reports</strong><small>Access reports online</small></button>
+   <button class="quick-card reveal" onclick="openAssistant()"><span><i class="fa-solid fa-robot"></i></span><strong>AI Health Assistant</strong><small>Get service suggestions</small></button>
+   <button class="quick-card reveal" onclick="showToast('Doctor consultation demo opened')"><span><i class="fa-solid fa-video"></i></span><strong>Doctor Consultation</strong><small>Video / online consultation</small></button>
+   <a class="quick-card reveal" href="https://wa.me/911234567890?text=Hello%20WECARE PLUS%2C%20I%20need%20healthcare%20assistance." target="_blank"><span><i class="fa-brands fa-whatsapp"></i></span><strong>WhatsApp Connect</strong><small>Chat with healthcare support</small></a>
+ </div>
+</div>
+</section>
+
+<section data-page-view="services" class="section" id="find" style="padding-top:30px">
+<div class="container">
+  <div class="section-head reveal"><span class="eyebrow">Smart Search</span><h2>Search Healthcare Services</h2><p>Filter sample healthcare facilities by service, speciality, distance and availability.</p></div>
+  <div class="filter-box reveal">
+    <input class="control search-control" id="searchInput" placeholder="Search by facility or speciality...">
+    <select class="control" id="typeFilter"><option value="All">All Services</option><option>Hospital</option><option>Clinic</option><option>Diagnostic Center</option><option>Blood Bank</option><option>Pharmacy</option><option>Emergency</option><option>Doctor</option><option>Ambulance</option></select>
+    <select class="control" id="specialityFilter"><option value="All">All Specialities</option><option>General Medicine</option><option>Cardiology</option><option>Neurology</option><option>Orthopedics</option><option>Dermatology</option><option>Pediatrics</option><option>Gynecology</option><option>Dentistry</option><option>ENT</option><option>Ophthalmology</option><option>Psychiatry</option><option>Oncology</option><option>Nephrology</option><option>Gastroenterology</option></select>
+    <select class="control" id="distanceFilter"><option value="25">Within 25 km</option><option value="1">Within 1 km</option><option value="5">Within 5 km</option><option value="10">Within 10 km</option></select>
+    <select class="control" id="availabilityFilter"><option value="All">All Availability</option><option value="Open Now">Open Now</option><option value="24/7">24/7</option></select>
+    <button class="btn btn-primary" id="applyBtn">Apply Filters</button>
+  </div>
+  <div class="results-head"><h3>Nearby Results</h3><span class="count" id="resultCount"></span></div>
+  <div class="results-grid" id="results"></div>
+</div>
+</section>
+
+
+<section data-page-view="doctors" class="section" id="doctors">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">Our Doctors</span><h2>Meet Healthcare Specialists</h2><p>Browse sample doctor profiles and book a consultation with the speciality you need.</p></div>
+ <div class="doctor-grid">
+  <article class="doctor-profile reveal"><img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=85" alt="Female doctor"><div class="doctor-body"><span class="type">Cardiology</span><h3>Dr. Priya Sharma</h3><p>MBBS, MD • 12 years experience</p><div class="doctor-meta">★★★★★ 4.9 • 128 reviews</div><button class="btn btn-primary" onclick="bookDoctor('Dr. Priya Sharma','Cardiology')">Book Consultation</button></div></article>
+  <article class="doctor-profile reveal"><img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=700&q=85" alt="Male doctor"><div class="doctor-body"><span class="type">Neurology</span><h3>Dr. Arjun Mehta</h3><p>MBBS, DM • 10 years experience</p><div class="doctor-meta">★★★★★ 4.8 • 94 reviews</div><button class="btn btn-primary" onclick="bookDoctor('Dr. Arjun Mehta','Neurology')">Book Consultation</button></div></article>
+  <article class="doctor-profile reveal"><img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=700&q=85" alt="Female medical specialist"><div class="doctor-body"><span class="type">Gynecology</span><h3>Dr. Neha Kapoor</h3><p>MBBS, MS • 9 years experience</p><div class="doctor-meta">★★★★★ 4.9 • 110 reviews</div><button class="btn btn-primary" onclick="bookDoctor('Dr. Neha Kapoor','Gynecology')">Book Consultation</button></div></article>
+  <article class="doctor-profile reveal"><img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=700&q=85" alt="Male healthcare specialist"><div class="doctor-body"><span class="type">Orthopedics</span><h3>Dr. Rahul Verma</h3><p>MBBS, MS • 14 years experience</p><div class="doctor-meta">★★★★★ 4.7 • 86 reviews</div><button class="btn btn-primary" onclick="bookDoctor('Dr. Rahul Verma','Orthopedics')">Book Consultation</button></div></article>
+ </div>
+</div>
+</section>
+
+<section data-page-view="services" class="section" id="diseases">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">Health Needs</span><h2>Find Care for Your Health Needs</h2><p>Choose a health category to find the type of healthcare service you may need. This section is for service discovery, not diagnosis.</p></div>
+ <div class="disease-grid">
+  <div class="disease-card reveal" data-speciality="Cardiology"><h3>❤️ Heart & Cardiovascular</h3><ul><li>Heart Disease</li><li>Hypertension</li><li>Cholesterol</li><li>Arrhythmia</li></ul></div>
+  <div class="disease-card reveal" data-speciality="General Medicine"><h3>🩸 Diabetes & Metabolic</h3><ul><li>Diabetes</li><li>Thyroid Disorders</li><li>Obesity</li></ul></div>
+  <div class="disease-card reveal" data-speciality="Pulmonology"><h3>🫁 Respiratory</h3><ul><li>Asthma</li><li>COPD</li><li>Respiratory Infections</li></ul></div>
+  <div class="disease-card reveal" data-speciality="Neurology"><h3>🧠 Neurological</h3><ul><li>Migraine</li><li>Epilepsy</li><li>Stroke</li><li>Neurological Disorders</li></ul></div>
+  <div class="disease-card reveal" data-speciality="Orthopedics"><h3>🦴 Bone & Joint</h3><ul><li>Arthritis</li><li>Back Pain</li><li>Fractures</li><li>Osteoporosis</li></ul></div>
+  <div class="disease-card reveal" data-speciality="Dermatology"><h3>✨ Skin</h3><ul><li>Acne</li><li>Eczema</li><li>Psoriasis</li><li>Skin Infections</li></ul></div>
+  <div class="disease-card reveal" data-speciality="Gastroenterology"><h3>🍽️ Digestive</h3><ul><li>Gastritis</li><li>Ulcer</li><li>IBS</li><li>Liver Disorders</li></ul></div>
+  <div class="disease-card reveal" data-speciality="Gynecology"><h3>♀ Women's Health</h3><ul><li>PCOS</li><li>Pregnancy Care</li><li>Menstrual Disorders</li></ul></div>
+  <div class="disease-card reveal" data-speciality="Pediatrics"><h3>👶 Children's Health</h3><ul><li>Pediatric Care</li><li>Vaccination</li><li>Childhood Infections</li></ul></div>
+  <div class="disease-card reveal" data-speciality="Dentistry"><h3>🦷 Dental</h3><ul><li>Toothache</li><li>Cavities</li><li>Gum Disease</li></ul></div>
+  <div class="disease-card reveal" data-speciality="Ophthalmology"><h3>👁️ Eye Care</h3><ul><li>Cataracts</li><li>Vision Problems</li><li>Eye Infections</li></ul></div>
+  <div class="disease-card reveal" data-speciality="Psychiatry"><h3>🧘 Mental Wellness</h3><ul><li>Stress</li><li>Anxiety</li><li>Depression</li></ul></div>
+ </div>
+</div>
+</section>
+
+<section data-page-view="blood" class="section" id="emergency">
+<div class="container">
+ <div class="emergency reveal">
+  <span class="eyebrow" style="background:#ffffff18;color:#fff">Emergency Support</span>
+  <h2>Need Emergency Medical Help?</h2>
+  <p>For urgent situations, quickly access emergency hospitals, ambulance services and blood banks. If someone is in immediate danger, contact your local emergency service.</p>
+  <div class="emergency-actions">
+   <button class="btn btn-danger" onclick="filterType('Emergency')"><i class="fa-solid fa-hospital"></i> Emergency Hospital</button>
+   <button class="btn btn-light" onclick="filterType('Ambulance')"><i class="fa-solid fa-ambulance"></i> Find Ambulance</button>
+   <button class="btn btn-light" onclick="filterType('Blood Bank')"><i class="fa-solid fa-droplet"></i> Find Blood Bank</button>
+   <a class="btn btn-light" href="tel:112"><i class="fa-solid fa-phone"></i> Call 112</a>
+   <a class="btn btn-light" href="https://wa.me/911234567890?text=URGENT%20HEALTHCARE%20ASSISTANCE" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp Help</a>
+  </div>
+ </div>
+</div>
+</section>
+
+
+<section data-page-view="services" class="section" id="showcase">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">Healthcare Gallery</span><h2>Care That Feels Closer</h2><p>Explore a visual overview of hospitals, doctors, diagnostics and emergency care.</p></div>
+ <div class="gallery-grid">
+   <div class="gallery-card gallery-large reveal">
+     <img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=1200&q=85" alt="Modern hospital building">
+     <div class="gallery-overlay"><span>🏥</span><div><strong>Modern Hospitals</strong><small>Trusted facilities & emergency care</small></div></div>
+   </div>
+   <div class="gallery-card reveal">
+     <img src="https://images.unsplash.com/photo-1550831107-1553da8c8464?auto=format&fit=crop&w=700&q=85" alt="Healthcare professional">
+     <div class="gallery-overlay"><span>👨‍⚕️</span><div><strong>Specialist Doctors</strong><small>Find the right speciality</small></div></div>
+   </div>
+   <div class="gallery-card reveal">
+     <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=700&q=85" alt="Medical team">
+     <div class="gallery-overlay"><span>🩺</span><div><strong>Quality Care</strong><small>Healthcare information at a glance</small></div></div>
+   </div>
+ </div>
+</div>
+</section>
+
+<section data-page-view="hospitals" class="section">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">Explore Map</span><h2>Healthcare Services Near You</h2><p>A visual map-style interface for this frontend academic project.</p></div>
+ <div class="map-layout">
+  <div class="map reveal" id="healthMap"></div>
+  <aside class="map-info reveal" id="mapInfo">
+   <div class="icon"><i class="fa-solid fa-location-dot"></i></div>
+   <h3>Select a map marker</h3><p>Click any healthcare marker to see facility information.</p>
+   <div class="info-list"><div class="info-line"><i class="fa-solid fa-map"></i> Interactive OpenStreetMap</div><div class="info-line"><i class="fa-solid fa-location-crosshairs"></i> Use my current location</div><div class="info-line"><i class="fa-solid fa-route"></i> Get directions in Google Maps</div></div>
+   <div class="map-controls"><button class="btn btn-primary" onclick="locateOnMap()"><i class="fa-solid fa-location-crosshairs"></i> Use My Location</button><button class="btn btn-light" onclick="fitHealthMap()"><i class="fa-solid fa-expand"></i> Show All</button></div>
+  </aside>
+ </div>
+</div>
+</section>
+
+<section data-page-view="services" class="section">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">Simple Process</span><h2>How It Works</h2></div>
+ <div class="steps">
+  <div class="step reveal"><div class="num">01</div><h3>Search</h3><p>Search for the healthcare service you need.</p></div>
+  <div class="step reveal"><div class="num">02</div><h3>Choose</h3><p>Compare nearby healthcare facilities.</p></div>
+  <div class="step reveal"><div class="num">03</div><h3>Check Details</h3><p>View services, availability and contact information.</p></div>
+  <div class="step reveal"><div class="num">04</div><h3>Get Directions</h3><p>Navigate to the selected healthcare facility.</p></div>
+ </div>
+</div>
+</section>
+
+
+<section data-page-view="beds" class="section" id="beds">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">Live-style Availability</span><h2>Check Available Hospital Beds</h2><p>Sample availability dashboard for the academic prototype. Connect this interface to a real hospital API/database in production.</p></div>
+ <div class="beds-grid">
+  <article class="bed-card reveal"><div><span class="type">ICU</span><h3>CityCare Multispeciality Hospital</h3><p>Central Avenue</p></div><strong class="bed-number">06 <small>beds</small></strong><span class="bed-status available">Available</span><button class="btn btn-light" onclick="showToast('Bed enquiry sent to CityCare')">Check & Reserve</button></article>
+  <article class="bed-card reveal"><div><span class="type">General Ward</span><h3>Sunrise Women & Child Hospital</h3><p>Family Care Avenue</p></div><strong class="bed-number">18 <small>beds</small></strong><span class="bed-status available">Available</span><button class="btn btn-light" onclick="showToast('Bed enquiry sent to Sunrise Hospital')">Check & Reserve</button></article>
+  <article class="bed-card reveal"><div><span class="type">Emergency</span><h3>Metro Emergency Hospital</h3><p>Emergency Hub</p></div><strong class="bed-number">03 <small>beds</small></strong><span class="bed-status limited">Limited</span><button class="btn btn-light" onclick="showToast('Emergency bed availability requested')">Check Status</button></article>
+ </div>
+</div>
+</section>
+
+<section data-page-view="labs" class="section" id="labs">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">Digital Reports</span><h2>Online Lab Reports</h2><p>Upload or retrieve a report using a sample patient/report ID. This is a frontend demonstration.</p></div>
+ <div class="lab-panel reveal">
+  <div class="lab-art"><i class="fa-solid fa-file-medical"></i><span>Secure Report Portal</span><small>Reports • Test Results • History</small></div>
+  <div class="lab-form">
+    <label>Report / Patient ID<input class="control" id="reportId" placeholder="e.g. HF-2026-1024"></label>
+    <label>Date of Birth<input class="control" type="date"></label>
+    <div class="lab-actions"><button class="btn btn-primary" onclick="findReport()">View Report</button><label class="btn btn-light upload-label"><i class="fa-solid fa-upload"></i> Upload Report<input type="file" hidden accept=".pdf,.jpg,.jpeg,.png" onchange="uploadReport(this)"></label></div>
+    <div class="report-result" id="reportResult"></div>
+  </div>
+ </div>
+</div>
+</section>
+
+<section data-page-view="booking" class="section" id="appointment">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">Online Booking</span><h2>Book an Appointment with a Specialist</h2><p>Select a doctor, speciality, date and preferred consultation mode.</p></div>
+ <form class="appointment-form reveal" id="appointmentForm">
+  <label>Hospital<select class="control" id="appointmentHospital"><option>CityCare Multispeciality Hospital</option><option>Sunrise Women & Child Hospital</option><option>Metro Emergency Hospital</option></select></label>
+  <label>Doctor<select class="control" id="appointmentDoctor"><option>Dr. Priya Sharma — Cardiology</option><option>Dr. Arjun Mehta — Neurology</option><option>Dr. Neha Kapoor — Gynecology</option><option>Dr. Rahul Verma — Orthopedics</option></select></label>
+  <label>Appointment Date<input class="control" type="date" required></label>
+  <label>Preferred Time<select class="control"><option>09:00 AM</option><option>11:30 AM</option><option>02:00 PM</option><option>05:30 PM</option></select></label>
+  <label>Consultation<select class="control"><option>In-person Visit</option><option>Video Consultation</option><option>Phone Consultation</option></select></label>
+  <label>Your Name<input class="control" id="patientName" required placeholder="Enter your name"></label>
+  <label>Mobile Number<input class="control" id="patientPhone" required type="tel" placeholder="+91"></label>
+  <label>Email Address<input class="control" id="patientEmail" type="email" placeholder="you@example.com"></label>
+  <button class="btn btn-primary" type="submit"><i class="fa-solid fa-calendar-check"></i> Confirm Appointment</button>
+ </form>
+</div>
+</section>
+
+<section data-page-view="services" class="section" id="about">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">Awareness</span><h2>Healthcare Awareness</h2><p>Simple, general wellness reminders for everyday awareness.</p></div>
+ <div class="tips">
+  <div class="tip-card reveal"><i class="fa-solid fa-calendar-check"></i><h3>Regular Health Checkups</h3><p>Keep routine appointments appropriate for your age and needs.</p></div>
+  <div class="tip-card reveal"><i class="fa-solid fa-glass-water"></i><h3>Stay Hydrated</h3><p>Maintain healthy hydration throughout your day.</p></div>
+  <div class="tip-card reveal"><i class="fa-solid fa-apple-whole"></i><h3>Balanced Diet</h3><p>Choose a varied and balanced diet whenever possible.</p></div>
+  <div class="tip-card reveal"><i class="fa-solid fa-person-running"></i><h3>Regular Exercise</h3><p>Stay physically active according to your abilities.</p></div>
+  <div class="tip-card reveal"><i class="fa-solid fa-pills"></i><h3>Responsible Medication</h3><p>Use medicines according to professional instructions.</p></div>
+  <div class="tip-card reveal"><i class="fa-solid fa-phone-volume"></i><h3>Know Emergency Numbers</h3><p>Keep important local emergency contacts easy to access.</p></div>
+  <div class="tip-card reveal"><i class="fa-solid fa-folder-open"></i><h3>Keep Medical Records</h3><p>Organize important reports and healthcare information.</p></div>
+  <div class="tip-card reveal"><i class="fa-solid fa-shield-heart"></i><h3>Choose Trusted Care</h3><p>Verify facility information before using a service.</p></div>
+ </div>
+</div>
+</section>
+
+<section data-page-view="services" class="section" style="padding-top:20px">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">About</span><h2>About WECARE PLUS</h2><p>WECARE PLUS is a healthcare service discovery platform designed to help users quickly locate hospitals, clinics, diagnostic centers, blood banks, pharmacies and emergency services. Designed as a BCA 2nd Year UI/UX academic project.</p></div>
+</div>
+</section>
+</main>
+
+
+
+<section data-page-view="blood" class="section" id="highway"><div class="container">
+<div class="section-head reveal"><span class="eyebrow">Roadside Emergency</span><h2>National Highway Emergency Services</h2><p>Quick access to highway assistance while travelling in India.</p></div>
+<div class="emergency-service-grid">
+<a class="emergency-service-card reveal" href="tel:1033"><span class="service-icon"><i class="fa-solid fa-road"></i></span><div><strong>NHAI Highway Helpline</strong><small>1033 • Toll-free highway assistance</small><p>Report highway accidents, breakdowns and request assistance.</p></div><i class="fa-solid fa-phone"></i></a>
+<a class="emergency-service-card reveal" href="tel:112"><span class="service-icon red"><i class="fa-solid fa-triangle-exclamation"></i></span><div><strong>National Emergency</strong><small>112 • Emergency response</small><p>For urgent situations requiring emergency assistance.</p></div><i class="fa-solid fa-phone"></i></a>
+<button class="emergency-service-card reveal" onclick="openHighwayChecklist()"><span class="service-icon amber"><i class="fa-solid fa-car-burst"></i></span><div><strong>Highway Accident Help</strong><small>Location & nearby healthcare</small><p>Find nearby emergency hospitals and services.</p></div><i class="fa-solid fa-arrow-right"></i></button>
+</div><div class="highway-note reveal"><i class="fa-solid fa-circle-info"></i><span>NHAI states that road users can dial <strong>1033</strong> for emergency or non-emergency assistance on National Highways. Assistance may include ambulance, patrol vehicle and crane services depending on the highway arrangement.</span></div>
+</div></section>
+
+
+<section data-page-view="hospitals" class="section db-section" id="database">
+<div class="container">
+<div class="section-head reveal"><span class="eyebrow">Live Data Infrastructure</span><h2>WECARE PLUS Database & Map Support</h2>
+<p>Connect the application to a database-backed healthcare directory and display facilities on the interactive map.</p></div>
+<div class="db-grid">
+<div class="db-card reveal"><div class="db-icon"><i class="fa-solid fa-database"></i></div><div><span class="db-label">DATABASE</span><h3 id="dbMapStatus">Checking backend...</h3><p id="dbMapText">Loading hospitals, clinics, diagnostics, blood banks and pharmacies from the API.</p></div></div>
+<div class="db-card reveal"><div class="db-icon map"><i class="fa-solid fa-map-location-dot"></i></div><div><span class="db-label">MAP DATA</span><h3 id="mapDataCount">Loading locations...</h3><p>Map markers are loaded from the database-backed <code>/api/hospitals</code> endpoint.</p></div></div>
+</div>
+<div class="db-actions reveal"><button class="btn btn-primary" onclick="refreshWecairData()"><i class="fa-solid fa-rotate"></i> Refresh Data</button><button class="btn btn-light" onclick="showDatabaseInfo()"><i class="fa-solid fa-circle-info"></i> Database Info</button></div>
+</div></section>
+
+<section data-page-view="blood" class="section" id="blood"><div class="container">
+<div class="section-head reveal"><span class="eyebrow">Blood Bank Services</span><h2>Find Blood • Donate Blood • Save Lives</h2><p>Search blood availability and donor services through the Government of India's e-RaktKosh.</p></div>
+<div class="blood-grid">
+<div class="blood-search-card reveal"><div class="blood-drop"><i class="fa-solid fa-droplet"></i></div><h3>Blood Availability</h3><p>Select a blood group and open the official availability service.</p><div class="blood-controls"><select class="control" id="bloodGroup"><option value="">Select Blood Group</option><option>A+</option><option>A−</option><option>B+</option><option>B−</option><option>AB+</option><option>AB−</option><option>O+</option><option>O−</option></select><button class="btn btn-primary" onclick="openBloodSearch()"><i class="fa-solid fa-magnifying-glass"></i> Check Availability</button></div></div>
+<div class="blood-donate-card reveal"><i class="fa-solid fa-hand-holding-droplet"></i><div><span class="type">Donate Blood</span><h3>Become a Voluntary Donor</h3><p>Register as a donor or find a nearby blood bank or donation camp through e-RaktKosh.</p><div class="blood-actions"><a class="btn btn-primary" target="_blank" href="https://eraktkosh.mohfw.gov.in/">e-RaktKosh</a><a class="btn btn-light" target="_blank" href="https://eraktkosh.mohfw.gov.in/BLDAHIMS/bloodbank/onlineDonationRequest.cnt">Register to Donate</a></div></div></div>
+</div><div class="donation-steps reveal"><div><b>01</b><span>Register</span></div><div><b>02</b><span>Health Screening</span></div><div><b>03</b><span>Donate</span></div><div><b>04</b><span>Help Save Lives</span></div></div>
+</div></section>
+
+<section data-page-view="faq" class="section" id="faq">
+<div class="container">
+ <div class="section-head reveal"><span class="eyebrow">FAQ</span><h2>Frequently Asked Questions</h2><p>Quick answers about using the WECARE PLUS prototype.</p></div>
+ <div class="faq-list">
+  <details class="faq-item reveal"><summary>How do I find a nearby hospital?</summary><p>Use the header search or Find Services section, select Hospital, set your distance and apply filters.</p></details>
+  <details class="faq-item reveal"><summary>Can I book an appointment online?</summary><p>Yes. Select a specialist in the appointment section, choose a date and consultation mode, then confirm the demo booking.</p></details>
+  <details class="faq-item reveal"><summary>Can I check hospital bed availability?</summary><p>The prototype includes a sample bed availability dashboard. A production version would connect it to verified hospital inventory data.</p></details>
+  <details class="faq-item reveal"><summary>How can I receive lab reports?</summary><p>Use the Online Lab Reports section with your report ID. The current version demonstrates the interface only.</p></details>
+  <details class="faq-item reveal"><summary>Is the AI assistant a doctor?</summary><p>No. The assistant is a service-navigation demo and does not diagnose conditions or replace a qualified healthcare professional.</p></details>
+  <details class="faq-item reveal"><summary>How can I contact support on WhatsApp?</summary><p>Use the WhatsApp Connect option to open a WhatsApp chat with the configured support number.</p></details>
+ </div>
+</div>
+</section>
+
+<footer>
+<div class="container">
+ <div class="footer-grid">
+  <div class="footer-brand"><a class="logo" href="#home" data-page="home" style="color:#fff"><span class="logo-mark"><i class="fa-solid fa-heart-pulse"></i></span><span>WECARE PLUS</span></a><p>Connecting people with nearby healthcare services through a simple, friendly interface.<br><span style="display:inline-block;margin-top:8px;font-size:10px;color:#63c7ff">● Backend-ready • Appointment API • Booking receipts</span></p><div class="socials"><a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a><a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a><a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></div></div>
+  <div><h4>Quick Links</h4><ul><li><a href="#home" data-page="home">Home</a></li><li><a href="#services" data-page="services">Services</a></li><li><a href="#services" data-page="services">Find Services</a></li><li><a href="#blood" data-page="blood">Emergency</a></li></ul></div>
+  <div><h4>Healthcare</h4><ul><li><a href="#find">Hospital Finder</a></li><li><a href="#find">Clinic Finder</a></li><li><a href="#find">Diagnostic Finder</a></li><li><a href="#find">Blood Bank Finder</a></li></ul></div>
+  <div><h4>Support</h4><ul><li><a href="#services" data-page="services">About</a></li><li><a href="#" onclick="showToast('Help center demo')">Help Center</a></li><li><a href="#" onclick="showToast('Contact feature demo')">Contact</a></li><li><a href="#" onclick="showToast('Privacy information demo')">Privacy</a></li><li><a href="#faq" data-page="faq">FAQ</a></li><li><a href="#labs" data-page="labs">Online Lab Reports</a></li><li><a href="#beds" data-page="beds">Available Beds</a></li></ul></div>
+
+  <div><h4>Developers</h4><ul>
+    <li><a href="mailto:vickey.WECARE PLUS@gmail.com">Vickey</a></li>
+    <li><a href="mailto:payal.WECARE PLUS@gmail.com">Payal</a></li>
+    <li><a href="mailto:ashwin.WECARE PLUS@gmail.com">Ashwin</a></li>
+    <li><a href="mailto:pankaj.WECARE PLUS@gmail.com">Pankaj</a></li>
+  </ul><p style="color:#7690a7;font-size:10px;margin-top:10px">Student UI/UX Development Team</p></div>
+
+ </div>
+ <div class="copyright">© 2026 WECARE PLUS. Student UI/UX Academic Project • Developers: Vickey, Payal, Ashwin & Pankaj</div>
+</div>
+</footer>
+
+
+<button class="ai-fab" onclick="openAssistant()" aria-label="Open AI health assistant"><i class="fa-solid fa-robot"></i><span>AI Assistant</span></button>
+<div class="assistant-modal" id="assistantModal">
+ <div class="assistant-box">
+  <div class="assistant-head"><div><strong><i class="fa-solid fa-robot"></i> WECARE PLUS AI Assistant</strong><small>Service navigation assistant</small></div><button onclick="closeAssistant()"><i class="fa-solid fa-xmark"></i></button></div>
+  <div class="chat-messages" id="chatMessages"><div class="chat ai">Hello! I can help you find a hospital, doctor, diagnostic center, blood bank or emergency service. What do you need?</div></div>
+  <div class="assistant-suggestions"><button onclick="askAI('I need a cardiologist')">Cardiologist</button><button onclick="askAI('I need emergency care')">Emergency</button><button onclick="askAI('I need a lab test')">Lab Test</button><button onclick="askAI('I need a blood bank')">Blood Bank</button></div>
+  <form class="chat-input" onsubmit="sendAI(event)"><input id="aiInput" placeholder="Describe what you need..." autocomplete="off"><button class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i></button></form>
+ </div>
+</div>
+
+<button class="top" id="topBtn" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+<div class="toast" id="toast"></div>
+
+
+<div class="modal" id="bookingModal">
+ <div class="modal-box">
+  <button class="modal-close" onclick="closeBooking()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  <div class="icon"><i class="fa-solid fa-calendar-check"></i></div>
+  <div class="modal-type">Specialist Appointment</div><h2 id="bookingDoctor">Book Consultation</h2>
+  <p class="small" id="bookingSpeciality"></p>
+  <div class="detail-grid"><div class="detail"><small>Next Available</small><strong>Today, 05:30 PM</strong></div><div class="detail"><small>Consultation</small><strong>In-person / Video</strong></div></div>
+  <button class="btn btn-primary" style="width:100%" onclick="document.getElementById('appointment').scrollIntoView({behavior:'smooth'});closeBooking()">Continue to Booking</button>
+ </div>
+</div>
+
+
+<div class="modal" id="highwayModal"><div class="modal-box"><button class="modal-close" onclick="closeHighwayChecklist()"><i class="fa-solid fa-xmark"></i></button><div class="icon"><i class="fa-solid fa-road"></i></div><div class="modal-type">Highway Safety</div><h2>Need help on a National Highway?</h2><p class="small">If there is immediate danger or injury, contact emergency services.</p><div class="highway-actions"><a class="btn btn-primary" href="tel:112"><i class="fa-solid fa-phone"></i> Call 112</a><a class="btn btn-light" href="tel:1033"><i class="fa-solid fa-road"></i> Call 1033</a><button class="btn btn-light" onclick="locateOnMap();closeHighwayChecklist()">Show My Location</button></div></div></div>
+<div class="modal" id="receiptModal">
+ <div class="modal-box receipt-box">
+  <button class="modal-close" onclick="closeReceipt()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  <div class="receipt-success"><i class="fa-solid fa-circle-check"></i></div>
+  <div class="modal-type">Appointment Confirmed</div>
+  <h2>Your Booking Receipt</h2>
+  <p class="small">Keep this booking ID for future reference.</p>
+  <div id="receiptContent" class="receipt-content"></div>
+  <div class="result-actions">
+    <button class="btn btn-primary" onclick="printReceipt()"><i class="fa-solid fa-print"></i> Print Receipt</button>
+    <button class="btn btn-light" onclick="downloadReceipt()"><i class="fa-solid fa-download"></i> Download</button>
+  </div>
+ </div>
+</div>
+
+<div class="modal" id="modal">
+ <div class="modal-box">
+  <button class="modal-close" onclick="closeModal()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  <div class="icon"><i class="fa-solid fa-hospital"></i></div>
+  <div class="modal-type" id="modalType"></div>
+  <h2 id="modalName"></h2>
+  <div class="rating" id="modalRating"></div>
+  <div class="detail-grid">
+   <div class="detail"><small>Address</small><strong id="modalAddress"></strong></div>
+   <div class="detail"><small>Distance</small><strong id="modalDistance"></strong></div>
+   <div class="detail"><small>Opening Hours</small><strong id="modalHours"></strong></div>
+   <div class="detail"><small>Emergency</small><strong id="modalEmergency"></strong></div>
+  </div>
+  <div class="modal-tags tags" id="modalTags"></div>
+  <div class="result-actions"><a id="modalCall" class="btn btn-primary"><i class="fa-solid fa-phone"></i> Call</a><a id="modalDirections" class="btn btn-light" target="_blank"><i class="fa-solid fa-diamond-turn-right"></i> Directions</a></div>
+ </div>
+</div>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+
+
+  <script src="js/app.js"></script>
+</body>
+</html>
